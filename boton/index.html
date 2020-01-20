@@ -1,25 +1,24 @@
-<?php
-// SDK de Mercado Pago
-require __DIR__ .  '/vendor/autoload.php';
-
-// Agrega credenciales
-MercadoPago\SDK::setAccessToken('TEST-2310086138645589-011700-c076a4d868dac3a5f2dcb3565ffec88b-248139607');
-
-// Crea un objeto de preferencia
-$preference = new MercadoPago\Preference();
-
-// Crea un ítem en la preferencia
-$item = new MercadoPago\Item();
-$item->title = 'Mi producto';
-$item->quantity = 1;
-$item->unit_price = 75.56;
-$preference->items = array($item);
-$preference->save();
-?>
-
 <!DOCTYPE html>
 <html>
 <head>
+  <?php
+  // SDK de Mercado Pago
+  require __DIR__ .  '/vendor/autoload.php';
+
+  // Agrega credenciales
+  MercadoPago\SDK::setAccessToken('TEST-2310086138645589-011700-c076a4d868dac3a5f2dcb3565ffec88b-248139607');
+
+  // Crea un objeto de preferencia
+  $preference = new MercadoPago\Preference();
+
+  // Crea un ítem en la preferencia
+  $item = new MercadoPago\Item();
+  $item->title = 'Mi producto';
+  $item->quantity = 1;
+  $item->unit_price = 75.56;
+  $preference->items = array($item);
+  $preference->save();
+  ?>
     <title>Pay</title>
 </head>
 <body>
