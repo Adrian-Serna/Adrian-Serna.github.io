@@ -1,22 +1,20 @@
 <?php
-require_once ('mercadopago.php');
+// SDK de Mercado Pago
+require __DIR__ .  '/vendor/autoload.php';
 
-$mp = new MP('TEST-e8c9cf31-e2b5-494f-9d7a-a3651c00ebcf', 'TEST-2310086138645589-011700-c076a4d868dac3a5f2dcb3565ffec88b-248139607');
+// Agrega credenciales
+MercadoPago\SDK::setAccessToken('APP_USR-2310086138645589-011700-ad6e093ee6382055b7d7921cc8d4217f-248139607');
 
-$mp->sandbox_mode(TRUE);
+// Crea un objeto de preferencia
+$preference = new MercadoPago\Preference();
 
-$preference_data = array(
-"items" => array(
-    array(
-        "title" => "Multicolor kite",
-        "quantity" => 1,
-        "currency_id" => "ARS", // Available currencies at: https://api.mercadopago.com/currencies
-        "unit_price" => 10.00
-    )
-)
-);
-
-$preference = $mp->create_preference($preference_data);
+// Crea un ítem en la preferencia
+$item = new MercadoPago\Item();
+$item->title = 'Mi producto';
+$item->quantity = 1;
+$item->unit_price = 75.56;
+$preference->items = array($item);
+$preference->save();
 ?>
 
 <!DOCTYPE html>
@@ -25,6 +23,11 @@ $preference = $mp->create_preference($preference_data);
     <title>Pay</title>
 </head>
 <body>
-    <a href="<?php echo $preference['response']['sandbox_init_point']; ?>">Pay</a>
+  <form action="/procesar-pago" method="POST">
+  <script
+   src="https://www.mercadopago.com.co/integrations/v1/web-payment-checkout.js"
+   data-preference-id="<?php echo $preference->id; ?>">
+  </script>
+  </form>
 </body>
 </html>
