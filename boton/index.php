@@ -1,32 +1,8 @@
-<!DOCTYPE html>
 <html>
-<head>
-  <?php
-  // SDK de Mercado Pago
-  require __DIR__ .  '/vendor/autoload.php';
-
-  // Agrega credenciales
-  MercadoPago\SDK::setAccessToken('APP_USR-2310086138645589-011700-ad6e093ee6382055b7d7921cc8d4217f-248139607');
-
-  // Crea un objeto de preferencia
-  $preference = new MercadoPago\Preference();
-
-  // Crea un ítem en la preferencia
-  $item = new MercadoPago\Item();
-  $item->title = 'Mi producto';
-  $item->quantity = 1;
-  $item->unit_price = 75.56;
-  $preference->items = array($item);
-  $preference->save();
-  ?>
-    <title>Pay</title>
-</head>
-<body>
-  <form action="/procesar-pago" method="POST">
-  <script
-   src="https://www.mercadopago.com.co/integrations/v1/web-payment-checkout.js"
-   data-preference-id="<?php echo $preference->id; ?>">
-  </script>
-  </form>
-</body>
+ <head>
+  <title>Prueba de PHP</title>
+ </head>
+ <body>
+ <?php echo '<p>Hola Mundo</p>'; ?>
+ </body>
 </html>
